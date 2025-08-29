@@ -1,7 +1,7 @@
-import Header from "./components/Header/Header";
-import Layout from "./components/Layout/Layout";
-import { useTheme } from "./hooks/useTheme";
-import Home from "./pages/Home/Home";
+import Header from './components/Header/Header';
+import Layout from './components/Layout/Layout';
+import { useTheme } from './hooks/useTheme';
+import Home from './pages/Home/Home';
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();

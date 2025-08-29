@@ -1,14 +1,16 @@
-import axios from "axios";
-import type { AxiosRequestConfig } from "axios";
-import type { BaseQueryFn } from "@reduxjs/toolkit/query";
+import axios from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 export const axiosBaseQuery =
-  ({ baseUrl }: { baseUrl: string } = { baseUrl: "" }): BaseQueryFn<
+  (
+    { baseUrl }: { baseUrl: string } = { baseUrl: '' },
+  ): BaseQueryFn<
     {
       url: string;
-      method: AxiosRequestConfig["method"];
-      data?: AxiosRequestConfig["data"];
-      params?: AxiosRequestConfig["params"];
+      method: AxiosRequestConfig['method'];
+      data?: AxiosRequestConfig['data'];
+      params?: AxiosRequestConfig['params'];
     },
     unknown,
     unknown

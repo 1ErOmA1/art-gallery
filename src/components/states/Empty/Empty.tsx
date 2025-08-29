@@ -1,4 +1,4 @@
-import styles from "./EmptyState.module.scss";
+import styles from './EmptyState.module.scss';
 
 const Empty = () => (
   <div className={styles.noResults}>

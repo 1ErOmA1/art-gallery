@@ -1,4 +1,4 @@
-import styles from "./Error.module.scss";
+import styles from './Error.module.scss';
 
 const Error = () => (
   <div className={styles.errorContainer}>

@@ -1,4 +1,4 @@
-import styles from "./Loading.module.scss";
+import styles from './Loading.module.scss';
 
 const Loading = () => (
   <div className={styles.loadingContainer}>
