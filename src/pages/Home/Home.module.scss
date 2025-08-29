@@ -1,0 +1,17 @@
+@use '../../styles/variables.module.scss' as *;
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  @media (max-width: 1440px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}

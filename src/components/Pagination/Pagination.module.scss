@@ -1,0 +1,142 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--primary-dark-gray);
+
+  position: relative;
+  &:not(.active)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: var(--secondary-gray);
+    transition: all 0.2s ease;
+    transform: translateX(-50%);
+  }
+
+  &:not(.active):hover:not(:disabled) {
+    background-color: transparent;
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.active {
+  background-color: rgba(18, 18, 18, 0.05);
+  color: var(--primary-dark-gray);
+  font-weight: 500;
+}
+
+.prevNextButton {
+  font-weight: bold;
+  &::after {
+    display: none;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  font-family: var(--font-family);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--primary-dark-gray);
+}
+
+@media (max-width: 767px) {
+  .pagination {
+    gap: 0.25rem;
+  }
+
+  .paginationButton {
+    min-width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .ellipsis {
+    min-width: 2rem;
+    height: 2rem;
+  }
+}
+
+[data-theme='dark'] {
+  .ellipsis {
+    color: var(--primary-light-gray);
+  }
+
+  .paginationButton {
+    background-color: var(--bg-primary-dark);
+    color: var(--primary-light-gray);
+  }
+
+  .active {
+    background-color: var(--bg-secondary-dark);
+  }
+
+  .prevNextButton {
+    &:hover:not(:disabled) {
+      background-color: var(--primary-dark-gray);
+    }
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    filter: invert(1) brightness(2);
+  }
+
+  .prevNextButton:disabled {
+    .arrowLeft,
+    .arrowRight {
+      filter: invert(1) brightness(2) opacity(0.5);
+    }
+  }
+}

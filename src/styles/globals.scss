@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  transition:
+  background-color 0.3s,
+  color 0.3s;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .container {
+    padding: 0 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1441px) {
+  .container {
+    padding: 0 64px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+}
+

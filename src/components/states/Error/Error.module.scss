@@ -1,0 +1,27 @@
+@use '../../../styles/variables.module.scss' as *;
+
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+
+  h2 {
+    color: #ff4757;
+    margin-bottom: 1rem;
+  }
+}
+
+.errorDetail {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
