@@ -1,32 +1,30 @@
 import { useMemo } from 'react';
-import { useGetAllItemsQuery } from '../api/ItemApi';
+import { useGetPaintingsQuery } from '../api/ItemApi';
 
-export const useItems = (page: number, limit: number = 6, searchTerm: string = '') => {
-  const safePage = Math.max(1, page);
-  const safeLimit = Math.max(1, Math.min(limit, 50));
-  const safeSearchTerm = searchTerm.trim();
+export function useItems(
+  page: number,
+  limit: number = 6,
+  searchTerm: string = '',
+) {
+  const { data, isLoading, isError, error } = useGetPaintingsQuery({
+    q: searchTerm,
+    _page: page,
+    _limit: limit,
+  });
 
-  const { data: allItems = [], isLoading, isError, error } = useGetAllItemsQuery(safeSearchTerm);
+  return useMemo(() => {
+    const items = data?.data ?? [];
+    const totalCount = data?.meta.totalCount ?? 0;
+    const totalPages = Math.max(1, Math.ceil(totalCount / limit));
 
-  const totalCount = allItems.length;
-
-  const totalPages = Math.max(1, Math.ceil(totalCount / safeLimit));
-
-  const currentPage = Math.min(safePage, totalPages);
-
-  const items = useMemo(() => {
-    const start = (currentPage - 1) * safeLimit;
-    const end = start + safeLimit;
-    return allItems.slice(start, end);
-  }, [allItems, currentPage, safeLimit]);
-
-  return {
-    items,
-    totalPages,
-    isLoading,
-    isError,
-    error,
-    totalCount,
-    currentPage,
-  };
-};
+    return {
+      items,
+      totalPages,
+      isLoading,
+      isError,
+      error,
+      totalCount,
+      currentPage: page,
+    };
+  }, [data, isLoading, isError, error, limit, page]);
+}

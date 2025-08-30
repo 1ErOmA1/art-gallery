@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 import styles from './SearchBar.module.scss';
 
 interface SearchBarProps {
-  theme: string;
-  onSearch: (term: string) => void;
+  theme: string
+  onSearch: (term: string) => void
 }
 
-const SearchBar = ({ theme, onSearch }: SearchBarProps) => {
+function SearchBar({ theme, onSearch }: SearchBarProps) {
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -58,6 +58,6 @@ const SearchBar = ({ theme, onSearch }: SearchBarProps) => {
       )}
     </div>
   );
-};
+}
 
 export default SearchBar;

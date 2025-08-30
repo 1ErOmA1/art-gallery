@@ -1,25 +1,33 @@
-import styles from './Pagination.module.scss';
 import arrowLeft from '../../assets/icons/arrow/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow/arrow-right.svg';
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
 }
 
-const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
   const safeTotalPages = Math.max(1, totalPages);
 
-  if (safeTotalPages <= 1) return null;
+  if (safeTotalPages <= 1)
+    return null;
 
   const getPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 3;
 
-    let startPage = Math.max(1, safeCurrentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(safeTotalPages, startPage + maxVisiblePages - 1);
+    let startPage = Math.max(
+      1,
+      safeCurrentPage - Math.floor(maxVisiblePages / 2),
+    );
+    const endPage = Math.min(safeTotalPages, startPage + maxVisiblePages - 1);
 
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -54,11 +62,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
 
   const pageNumbers = getPageNumbers();
 
-  if (totalPages <= 1) return null;
+  if (totalPages <= 1)
+    return null;
 
   return (
     <div className={styles.pagination}>
       <button
+        type="button"
         className={`${styles.paginationButton} ${styles.prevNextButton}`}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -67,10 +77,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         <img src={arrowLeft} alt="Стрелка влево" className={styles.arrowLeft} />
       </button>
 
-      {pageNumbers.map((page, index) => {
+      {pageNumbers.map((page) => {
         if (typeof page === 'string') {
           return (
-            <span key={index} className={styles.ellipsis}>
+            <span key={page} className={styles.ellipsis}>
               ...
             </span>
           );
@@ -78,7 +88,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
 
         return (
           <button
-            key={index}
+            type="button"
+            key={`page-${page}`}
             className={`${styles.paginationButton} ${page === currentPage ? styles.active : ''}`}
             onClick={() => handlePageChange(page)}
             aria-label={`Page ${page}`}
@@ -90,15 +101,20 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       })}
 
       <button
+        type="button"
         className={`${styles.paginationButton} ${styles.prevNextButton}`}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         aria-label="Next page"
       >
-        <img src={arrowRight} alt="Стрелка вправо" className={styles.arrowRight} />
+        <img
+          src={arrowRight}
+          alt="Стрелка вправо"
+          className={styles.arrowRight}
+        />
       </button>
     </div>
   );
-};
+}
 
 export default Pagination;

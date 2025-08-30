@@ -3,7 +3,7 @@ import Layout from './components/Layout/Layout';
 import { useTheme } from './hooks/useTheme';
 import Home from './pages/Home/Home';
 
-const App = () => {
+function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -14,6 +14,6 @@ const App = () => {
       </Layout>
     </div>
   );
-};
+}
 
 export default App;

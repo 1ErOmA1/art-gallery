@@ -1,21 +1,22 @@
-import styles from './ThemeToggle.module.scss';
-import SunIcon from '../../assets/icons/sun-icon.svg';
 import MoonIcon from '../../assets/icons/moon-icon.svg';
+import SunIcon from '../../assets/icons/sun-icon.svg';
+import styles from './ThemeToggle.module.scss';
 
 interface ThemeToggleProps {
-  theme: string;
-  onToggle: () => void;
+  theme: string
+  onToggle: () => void
 }
 
-const ThemeToggle = ({ theme, onToggle }: ThemeToggleProps) => {
+function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   const icon = theme === 'light' ? MoonIcon : SunIcon;
-  const altText =
-    theme === 'light'
+  const altText
+    = theme === 'light'
       ? 'Черная иконка луны - переключить на темную тему'
       : 'Белая иконка луны - переключить на светлую тему';
 
   return (
     <button
+      type="button"
       className={styles.themeToggle}
       onClick={onToggle}
       aria-label={altText}
@@ -24,6 +25,6 @@ const ThemeToggle = ({ theme, onToggle }: ThemeToggleProps) => {
       <img src={icon} alt={altText} className={styles.icon} />
     </button>
   );
-};
+}
 
 export default ThemeToggle;

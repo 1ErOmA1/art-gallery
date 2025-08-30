@@ -1,23 +1,57 @@
+import type { IAuthor, ILocation, IPainting } from '../types';
 import { createApi } from '@reduxjs/toolkit/query/react';
-import type { IArtistCard } from '../types';
 import { axiosBaseQuery } from './axiosBaseQuery';
 
 export const itemApi = createApi({
   reducerPath: 'itemApi',
   baseQuery: axiosBaseQuery({
-    baseUrl: 'https://6885cd35f52d34140f6a963d.mockapi.io',
+    baseUrl: 'https://test-front.framework.team',
   }),
-  tagTypes: ['Item'],
-  endpoints: (builder) => ({
-    getAllItems: builder.query<IArtistCard[], string | void>({
-      query: (search = '') => ({
-        url: '/items',
+  tagTypes: ['Painting', 'Author', 'Location'],
+  endpoints: builder => ({
+    getPaintings: builder.query<
+      { data: IPainting[], meta: { totalCount: number } },
+      { q?: string, _page?: number, _limit?: number }
+    >({
+      keepUnusedDataFor: 60,
+      query: ({ q, _page, _limit } = {}) => ({
+        url: '/paintings',
         method: 'GET',
-        params: search ? { search } : undefined,
+        params: { q, _page, _limit },
       }),
-      providesTags: ['Item'],
+      transformResponse: (response: IPainting[], meta) => {
+        const axiosMeta = meta as import('axios').AxiosResponse;
+        const totalCount = Number(
+          axiosMeta.headers['x-total-count'] ?? response.length,
+        );
+        return {
+          data: response,
+          meta: { totalCount },
+        };
+      },
+      providesTags: ['Painting'],
+    }),
+
+    getAuthors: builder.query<IAuthor[], void>({
+      query: () => ({
+        url: '/authors',
+        method: 'GET',
+      }),
+      providesTags: ['Author'],
+    }),
+
+    getLocations: builder.query<ILocation[], void>({
+      query: () => ({
+        url: '/locations',
+        method: 'GET',
+      }),
+      providesTags: ['Location'],
     }),
   }),
 });
 
-export const { useGetAllItemsQuery } = itemApi;
+export const {
+  useGetPaintingsQuery,
+  useGetAuthorsQuery,
+  useGetLocationsQuery,
+} = itemApi;

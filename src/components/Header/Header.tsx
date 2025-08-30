@@ -1,17 +1,17 @@
+import logoDark from '../../assets/icons/logo/logo-dark.svg';
+import logoLight from '../../assets/icons/logo/logo-light.svg';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import styles from './Header.module.scss';
-import logoLight from '../../assets/icons/logo/logo-light.svg';
-import logoDark from '../../assets/icons/logo/logo-dark.svg';
 
 interface HeaderProps {
-  theme: string;
-  onThemeToggle: () => void;
+  theme: string
+  onThemeToggle: () => void
 }
 
-const Header = ({ theme, onThemeToggle }: HeaderProps) => {
+function Header({ theme, onThemeToggle }: HeaderProps) {
   const logo = theme === 'light' ? logoLight : logoDark;
-  const logoAlt =
-    theme === 'light'
+  const logoAlt
+    = theme === 'light'
       ? 'Логотип Art Gallery - светлая версия'
       : 'Логотип Art Gallery - темная версия';
 
@@ -33,6 +33,6 @@ const Header = ({ theme, onThemeToggle }: HeaderProps) => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

@@ -1,27 +1,31 @@
-import { useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
+import { useCallback, useMemo, useState } from 'react';
 
-export const useSearch = () => {
+export function useSearch() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const debouncedSearch = useCallback(
-    debounce((term: string) => {
-      setSearchTerm(term);
-    }, 300),
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((term: string) => {
+        setSearchTerm(term);
+      }, 300),
     [],
   );
 
-  const handleSearch = (term: string) => {
-    debouncedSearch(term);
-  };
+  const handleSearch = useCallback(
+    (term: string) => {
+      debouncedSearch(term);
+    },
+    [debouncedSearch],
+  );
 
-  const clearSearch = () => {
+  const clearSearch = useCallback(() => {
     setSearchTerm('');
-  };
+  }, []);
 
   return {
     searchTerm,
     handleSearch,
     clearSearch,
   };
-};
+}

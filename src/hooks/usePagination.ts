@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const usePagination = (initialPage: number = 1) => {
+export function usePagination(initialPage: number = 1) {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   const handlePageChange = (page: number) => {
@@ -18,4 +18,4 @@ export const usePagination = (initialPage: number = 1) => {
     handlePageChange,
     resetPagination,
   };
-};
+}
